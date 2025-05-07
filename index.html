@@ -72,14 +72,26 @@
 
     .pass {
       color: green;
-      font-size: 20px;
     }
 
     .fail {
       color: red;
     }
+
+    .criteria {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #444;
+      text-align: left;
+      padding: 10px;
+      background: #f9f9f9;
+      border-radius: 8px;
+    }
+
+    .criteria strong {
+      color: #c70000;
+    }
   </style>
-  
 </head>
 <body>
   <div class="container">
@@ -108,18 +120,7 @@
     <div id="result" class="result"></div>
   </div>
 
-  <!-- Confetti Library -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
   <script>
-    function launchConfetti() {
-      confetti({
-        particleCount: 150,
-        spread: 70,
-        origin: { y: 0.6 }
-      });
-    }
-
     function calculateTotal() {
       const assignment = parseFloat(document.getElementById("assignment").value) || 0;
       const attendance = parseFloat(document.getElementById("attendance").value) || 0;
@@ -135,24 +136,24 @@
       const passed = total >= passMark;
 
       const resultDiv = document.getElementById("result");
-      resultDiv.innerHTML = `Total Internal Marks: ${total.toFixed(2)} / 43 <br>
-        <span class="${passed ? 'pass' : 'fail'}">
-          ${passed ? ' Congratulations! You Passed!' : 'You Need Improvement '}
-        </span>`;
 
       if (passed) {
-        launchConfetti();
-        
+        resultDiv.innerHTML = `Total Internal Marks: ${total.toFixed(2)} / 43 <br><span class="pass">🎉 Congratulations! You Passed!</span>`;
+      } else {
+        const needed = (passMark - total).toFixed(2);
+        resultDiv.innerHTML = `
+          Total Internal Marks: ${total.toFixed(2)} / 43 <br>
+          <span class="fail">You Need Improvement 😢<br>You need ${needed} more marks to pass.</span>
+          <div class="criteria">
+            <strong>Passing Criteria:</strong><br>
+            • Scoring 45+ ensures passing.<br>
+            • Combined internal + external should be 45+ (min 15–16 in external theory).<br>
+            • For practical subjects, aim for 45+ out of 100.<br>
+            <em>Thank you!</em>
+          </div>
+        `;
       }
     }
-    
   </script>
 </body>
-<div id="result" class="result"></div>
-</div> <!-- End of .container -->
-
-<footer style="text-align: center; margin-top: 20px; font-size: 14px; color: #555;">
-  ~By AVINASH
-</footer>
-
 </html>
