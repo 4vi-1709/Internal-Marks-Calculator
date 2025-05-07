@@ -120,6 +120,9 @@
     <div id="result" class="result"></div>
   </div>
 
+  <!-- Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
   <script>
     function calculateTotal() {
       const assignment = parseFloat(document.getElementById("assignment").value) || 0;
@@ -138,6 +141,13 @@
       const resultDiv = document.getElementById("result");
 
       if (passed) {
+        // Trigger confetti
+        confetti({
+          particleCount: 150,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+
         resultDiv.innerHTML = `Total Internal Marks: ${total.toFixed(2)} / 43 <br><span class="pass">🎉 Congratulations! You Passed!</span>`;
       } else {
         const needed = (passMark - total).toFixed(2);
