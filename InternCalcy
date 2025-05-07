@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CU Internal Marks Calculator</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #fbeee6, #ffd6a5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .calculator-container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .calculator-container img {
+      width: 80px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #cc5500;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      text-align: left;
+      color: #444;
+      font-weight: 500;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+
+    input[type="number"]:focus {
+      border-color: #ff7f00;
+      outline: none;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 16px;
+      background-color: #ff8800;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e67300;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    @media (max-width: 600px) {
+      .calculator-container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator-container">
+    <!-- 🔄 Replace 'your-logo.png' with your actual logo file or URL -->
+<img src="https://drive.google.com/uc?export=view&id=1u3GOGA5WS-m7jxi84GhUw0gbNuCm9xN4" alt="Logo" style="width:150px;height:auto;">
+
+    <h2>Internal Marks Calculator</h2>
+
+    <label>Assignment Marks (out of 10):</label>
+    <input type="number" id="assignment" max="10" min="0">
+
+    <label>Attendance Marks (out of 5):</label>
+    <input type="number" id="attendance" max="5" min="0">
+
+    <label>Case Study Marks (out of 16):</label>
+    <input type="number" id="caseStudy" max="16" min="0">
+
+    <label>MST 1 Marks (out of 20):</label>
+    <input type="number" id="mst1" max="20" min="0">
+
+    <label>MST 2 Marks (out of 20):</label>
+    <input type="number" id="mst2" max="20" min="0">
+
+    <button onclick="calculateMarks()">Calculate</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calculateMarks() {
+      const assignment = parseFloat(document.getElementById('assignment').value) || 0;
+      const attendance = parseFloat(document.getElementById('attendance').value) || 0;
+      const caseStudy = parseFloat(document.getElementById('caseStudy').value) || 0;
+      const mst1 = parseFloat(document.getElementById('mst1').value) || 0;
+      const mst2 = parseFloat(document.getElementById('mst2').value) || 0;
+
+      if (assignment > 10 || attendance > 5 || caseStudy > 16 || mst1 > 20 || mst2 > 20) {
+        alert("Please enter valid marks within the allowed ranges.");
+        return;
+      }
+
+      const caseStudyConverted = (caseStudy / 16) * 8;
+      const mstAverage = (mst1 + mst2) / 2;
+      const total = assignment + attendance + caseStudyConverted + mstAverage;
+
+      document.getElementById('result').innerText = 
+        `Your Total Internal Marks are: ${total.toFixed(2)} out of 43`;
+    }
+  </script>
+</body>
+</html>
