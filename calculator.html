@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CU Internal Marks Calculator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url('https://1.bp.blogspot.com/-PF-ExPxtXlQ/YQDrrpAA0AI/AAAAAAAAoRM/I_NxEEGmOHYngobE3TR8PA1WEMtC4r1CwCLcBGAsYHQ/s16000/Building.png');
+      background-size: cover;
+      background-position: center;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      max-width: 500px;
+      margin: 60px auto;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    .logo {
+      display: block;
+      margin: 0 auto 20px auto;
+      max-height: 80px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #ff6b00;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0 15px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #ff6b00;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #e55c00;
+    }
+
+    .result {
+      text-align: center;
+      font-size: 18px;
+      margin-top: 25px;
+      font-weight: bold;
+    }
+
+    .pass {
+      color: green;
+      font-size: 20px;
+    }
+
+    .fail {
+      color: red;
+    }
+  </style>
+  
+</head>
+<body>
+  <div class="container">
+    <img src="https://vectorseek.com/wp-content/uploads/2023/09/Chandigarh-University-CU-Logo-Vector.svg-.png" alt="Logo" class="logo">
+    <h1>Internal Marks Calculator</h1>
+    <h3>|| Mathematics || Biology ||</h3>
+    <form id="marksForm">
+      <label>Assignment Marks (out of 10):</label>
+      <input type="number" id="assignment" max="10" required>
+
+      <label>Attendance Marks (out of 5):</label>
+      <input type="number" id="attendance" max="5" required>
+
+      <label>Case Study Marks (out of 16):</label>
+      <input type="number" id="caseStudy" max="16" required>
+
+      <label>MST 1 Marks (out of 20):</label>
+      <input type="number" id="mst1" max="20" required>
+
+      <label>MST 2 Marks (out of 20):</label>
+      <input type="number" id="mst2" max="20" required>
+
+      <button type="button" onclick="calculateTotal()">Calculate</button>
+    </form>
+
+    <div id="result" class="result"></div>
+  </div>
+
+  <!-- Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    function launchConfetti() {
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    }
+
+    function calculateTotal() {
+      const assignment = parseFloat(document.getElementById("assignment").value) || 0;
+      const attendance = parseFloat(document.getElementById("attendance").value) || 0;
+      const caseStudy = parseFloat(document.getElementById("caseStudy").value) || 0;
+      const mst1 = parseFloat(document.getElementById("mst1").value) || 0;
+      const mst2 = parseFloat(document.getElementById("mst2").value) || 0;
+
+      const caseStudyConverted = (caseStudy / 16) * 8;
+      const mstAverage = (mst1 + mst2) / 2;
+      const total = assignment + attendance + caseStudyConverted + mstAverage;
+
+      const passMark = 21.5;
+      const passed = total >= passMark;
+
+      const resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = `Total Internal Marks: ${total.toFixed(2)} / 43 <br>
+        <span class="${passed ? 'pass' : 'fail'}">
+          ${passed ? ' Congratulations! You Passed!' : 'You Need Improvement '}
+        </span>`;
+
+      if (passed) {
+        launchConfetti();
+        
+      }
+    }
+    
+  </script>
+</body>
+<div id="result" class="result"></div>
+</div> <!-- End of .container -->
+
+<footer style="text-align: center; margin-top: 20px; font-size: 14px; color: #555;">
+  ~By AVINASH
+</footer>
+
+</html>
